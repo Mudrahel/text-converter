@@ -20,8 +20,4 @@ public class ConverterController {
         return encoderService.encode(textToEncode);
     }
 
-    @GetMapping
-    public String manaMana(){
-        return "up and running";
-    }
 }
