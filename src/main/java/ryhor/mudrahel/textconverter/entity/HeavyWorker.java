@@ -2,7 +2,6 @@ package ryhor.mudrahel.textconverter.entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,9 @@ public class HeavyWorker extends Thread {
 
     private SimpMessagingTemplate messagingTemplate;
 
-    @Autowired
+    public HeavyWorker(){
+    }
+
     public HeavyWorker(SimpMessagingTemplate messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
     }
