@@ -1,4 +1,4 @@
-package ryhor.mudrahel.textconverter;
+package ryhor.mudrahel.textconverter.entity;
 
 public class Message {
 

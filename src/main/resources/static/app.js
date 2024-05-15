@@ -28,9 +28,25 @@ function disconnect() {
 }
 
 function sendTextToConversion() {
+    console.log('sending text to conversion');
     stompClient.publish({
         destination: "/app/convert",
         body: JSON.stringify({'content': $("#text").val()})
+    });
+}
+
+function pidor() {
+    console.log('pidor');
+    stompClient.publish({
+        destination: "/app/pidor",
+        body: JSON.stringify({'content': $("#text").val()})
+    });
+}
+
+function cancelConversion() {
+    console.log('cancelling conversion');
+    stompClient.publish({
+        destination: "/app/cancelConversion"
     });
 }
 
@@ -44,6 +60,7 @@ $(function () {
 
     $("form").on('submit', (e) => e.preventDefault());
     $( "#sendText" ).click(() => sendTextToConversion());
+    $( "#cancel" ).click(() => cancelConversion());
 
     // Call disconnect() when the page is closed
     $(window).on('beforeunload', () => {
