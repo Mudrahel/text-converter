@@ -1,3 +1,5 @@
+package ryhor.mudrahel.textconverter;
+
 import ryhor.mudrahel.textconverter.service.BusyService;
 import ryhor.mudrahel.textconverter.service.impl.BusyServiceImpl;
 
