@@ -1,7 +1,6 @@
-package ryhor.mudrahel.textconverter.service.impl;
+package ryhor.mudrahel.textconverter.service;
 
 import org.springframework.stereotype.Service;
-import ryhor.mudrahel.textconverter.service.SplitterService;
 
 @Service
 public class TextSplitter implements SplitterService {

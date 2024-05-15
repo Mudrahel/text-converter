@@ -1,9 +1,7 @@
-package ryhor.mudrahel.textconverter.service.impl;
+package ryhor.mudrahel.textconverter.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ryhor.mudrahel.textconverter.service.ConvertingService;
-import ryhor.mudrahel.textconverter.service.EncoderService;
 
 @Service
 public class ConvertingServiceImpl implements ConvertingService {
