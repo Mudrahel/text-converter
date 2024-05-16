@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 public class HeavyWorker extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(HeavyWorker.class);
 
+    private static String conversionDestination="/topic/conversion";
+
     private char[] message;
 
     private boolean continueConversion = true;
@@ -47,7 +49,7 @@ public class HeavyWorker extends Thread {
                 }
             }
             logger.info("sending '{}' to outside",message[i]);
-            messagingTemplate.convertAndSend("/topic/conversion", "" + message[i]);
+            messagingTemplate.convertAndSend(conversionDestination, "" + message[i]);
         }
     }
 
