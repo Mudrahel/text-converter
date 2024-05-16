@@ -40,8 +40,17 @@ public class WorkerImpl implements Worker {
 
     @Override
     public void cancelProcessing() {
-        heavyWorker.setContinueConversion(false);
-        heavyWorker.interrupt();
+        if (Thread.State.RUNNABLE == heavyWorker.getState()
+                || Thread.State.TIMED_WAITING == heavyWorker.getState()) {
+            heavyWorker.setContinueConversion(false);
+            heavyWorker.interrupt();
+
+        }else if(Thread.State.NEW == heavyWorker.getState()
+                ||Thread.State.TERMINATED == heavyWorker.getState()){
+            logger.info("There is no work to interrupt");
+
+        }
+
     }
 
 }
