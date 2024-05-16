@@ -31,9 +31,8 @@ public class HeavyWorker extends Thread {
                 // Interrupt processing cycle
                 break;
             }
-            //TODO uncomment later as original delay
-//            long delay = (long) (Math.random() * 5000) + 1000;
-            long delay = (long) 500;
+
+            long delay = (long) (Math.random() * 5000) + 1000;
 
             try {
                 logger.info("imitation of heavy work");
