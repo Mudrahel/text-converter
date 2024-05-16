@@ -34,7 +34,7 @@ public class HeavyWorker extends Thread {
                 break;
             }
 
-            long delay = (long) (Math.random() * 5000) + 1000;
+            long delay = calculateDelay();
 
             try {
                 logger.info("imitation of heavy work");
@@ -51,6 +51,11 @@ public class HeavyWorker extends Thread {
             logger.info("sending '{}' to outside",message[i]);
             messagingTemplate.convertAndSend(conversionDestination, "" + message[i]);
         }
+        logger.info("Worker work ended");
+    }
+
+    private long calculateDelay(){
+        return (long) (Math.random() * 5000) + 1000;
     }
 
     public void setContinueConversion(boolean continueConversion) {
