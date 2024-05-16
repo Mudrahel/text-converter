@@ -30,8 +30,11 @@
                 <textarea id="text" rows="4" cols="50"></textarea>
             </div>
             <div>
-                <button id="sendText" class="btn btn-primary" type="submit">Convert</button>
-                <button id="cancel" class="btn btn-primary" type="submit" disabled>Cancel</button>
+                <button id="sendText" class="btn btn-primary" type="submit" title="Start text conversion">Convert</button>
+                <button id="cancel" class="btn btn-primary" type="submit" title="Cancel text conversion" disabled>Cancel</button>
+                <button id="copyButton" type="submit" title="copy result to clipboard">
+                    <img src="/images/copy-to-clipboard.png" alt="Copy to Clipboard">
+                </button>
 
                 <div id="processingPopup" class="hidden">
                     <div class="spinner"></div>

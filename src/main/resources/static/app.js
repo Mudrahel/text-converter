@@ -76,6 +76,14 @@ function endProcessing() {
     $("#processingPopup").css('display', 'none');
 }
 
+function copyToClipBoard() {
+    // Select the text in the textarea
+    var textarea = $("#result");
+    textarea.select();
+    // Copy the selected text to clipboard
+    document.execCommand("copy");
+}
+
 $(function () {
     // Call connect() on page load
     connect();
@@ -86,6 +94,7 @@ $(function () {
         cancelConversion();
         endProcessing();
     });
+    $( "#copyButton" ).click(() => copyToClipBoard());
 
     // Call disconnect() when the page is closed
     $(window).on('beforeunload', () => {
