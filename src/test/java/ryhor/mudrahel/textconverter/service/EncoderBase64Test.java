@@ -1,4 +1,4 @@
-package ryhor.mudrahel.textconverter.service.impl;
+package ryhor.mudrahel.textconverter.service;
 
 import org.junit.jupiter.api.Test;
 import ryhor.mudrahel.textconverter.service.EncoderBase64;
