@@ -31,11 +31,17 @@
             </div>
             <div>
                 <button id="sendText" class="btn btn-primary" type="submit">Convert</button>
-                <button id="cancel" class="btn btn-primary" type="submit">Cancel</button>
+                <button id="cancel" class="btn btn-primary" type="submit" disabled>Cancel</button>
+
+                <div id="processingPopup" class="hidden">
+                    <div class="spinner"></div>
+                    <p>Processing...</p>
+                </div>
+
             </div>
             <label for="result">conversion result:</label>
             <div>
-                <textarea id="result" rows="4" cols="50"></textarea>
+                <textarea id="result" rows="4" cols="50" readonly></textarea>
             </div>
         </div>
     </div>

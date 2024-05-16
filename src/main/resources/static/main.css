@@ -1,3 +1,9 @@
+/* Define CSS variables */
+:root {
+  --one-ink-blue: #23669b;
+  --black-c:#000;
+  --gray-c:#ccc;
+}
 
 body {
     padding-top: 60px; /* Adjust according to header height */
@@ -7,7 +13,7 @@ body {
 }
 
 footer {
-    background-color: #23669b;
+    background-color: var(--one-ink-blue);
     color: #fff;
     position: fixed;
     bottom: 0;
@@ -24,7 +30,7 @@ footer p {
 
 header {
     height: 80px;
-    background-color: #23669b;
+    background-color: var(--one-ink-blue);
     color: #fff;
     position: fixed;
     top: 0;
@@ -34,7 +40,7 @@ header {
 
 #sendText {
     background-color: #93d501;
-    color: #000;
+    color: var(--black-c);
     border: none;
 }
 
@@ -43,9 +49,13 @@ header {
     border: none;
 }
 
+#sendText:disabled {
+    background-color: var(--gray-c);
+}
+
 #cancel {
     background-color: #64b2ea;
-    color: #000;
+    color: var(--black-c);
     border: none;
 }
 
@@ -54,3 +64,49 @@ header {
     border: none;
 }
 
+#cancel:disabled {
+    background-color: var(--gray-c);
+}
+
+#result {
+   background-color: #f4f4f4;
+}
+
+
+/* animation and fancy stuff */
+
+#processingPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--one-ink-blue);
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  display: none;
+}
+
+.spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hidden {
+  display: none;
+}
+
+.btn-disabled {
+    background-color: #a0a0a0; /* Gray background for disabled state */
+    border: none;
+}

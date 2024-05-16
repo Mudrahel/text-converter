@@ -7,6 +7,9 @@ stompClient.onConnect = (frame) => {
     stompClient.subscribe('/topic/conversion', (portion) => {
         showResult(portion.body);
     });
+    stompClient.subscribe('/topic/conversion-complete', () => {
+            endProcessing();
+    });
 };
 
 stompClient.onWebSocketError = (error) => {
@@ -28,18 +31,18 @@ function disconnect() {
 }
 
 function sendTextToConversion() {
-    console.log('sending text to conversion');
+    var textValue = $("#text").val();
+    if (textValue.length === 0) {
+        console.log('There is nothing to process');
+        return; // Do nothing if there is no text to process
+    }
+
+    startProcessing();
+    console.log('Sending text to conversion');
+    $("#result").val('');
     stompClient.publish({
         destination: "/app/convert",
-        body: JSON.stringify({'content': $("#text").val()})
-    });
-}
-
-function pidor() {
-    console.log('pidor');
-    stompClient.publish({
-        destination: "/app/pidor",
-        body: JSON.stringify({'content': $("#text").val()})
+        body: JSON.stringify({'content': textValue})
     });
 }
 
@@ -54,13 +57,35 @@ function showResult(message) {
      $("#result").val($("#result").val() + message);
 }
 
+const sendTextButton = document.getElementById('sendText');
+const processingPopup = document.getElementById('processingPopup');
+
+function startProcessing() {
+    console.log('start processing UI');
+    // Processing started, disable button and show popup
+    $("#sendText").prop('disabled',true);
+    $("#cancel").prop('disabled',false);
+    $("#processingPopup").css('display', 'block');
+}
+
+function endProcessing() {
+    console.log('end processing UI');
+    // Processing completed, enable button and hide popup
+    $("#sendText").prop('disabled',false);
+    $("#cancel").prop('disabled',true);
+    $("#processingPopup").css('display', 'none');
+}
+
 $(function () {
     // Call connect() on page load
     connect();
 
     $("form").on('submit', (e) => e.preventDefault());
     $( "#sendText" ).click(() => sendTextToConversion());
-    $( "#cancel" ).click(() => cancelConversion());
+    $( "#cancel" ).click(() => {
+        cancelConversion();
+        endProcessing();
+    });
 
     // Call disconnect() when the page is closed
     $(window).on('beforeunload', () => {

@@ -10,6 +10,7 @@ public class HeavyWorker extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(HeavyWorker.class);
 
     private static String conversionDestination="/topic/conversion";
+    private static String conversionCompleteDestination="/topic/conversion-complete";
 
     private char[] message;
 
@@ -37,7 +38,7 @@ public class HeavyWorker extends Thread {
             long delay = calculateDelay();
 
             try {
-                logger.info("imitation of heavy work");
+                logger.debug("imitation of heavy work");
                 Thread.sleep(delay);
             } catch (InterruptedException e) {
                 if (!continueConversion) {
@@ -51,6 +52,8 @@ public class HeavyWorker extends Thread {
             logger.info("sending '{}' to outside",message[i]);
             messagingTemplate.convertAndSend(conversionDestination, "" + message[i]);
         }
+        messagingTemplate.convertAndSend(conversionCompleteDestination,"done");
+
         logger.info("Worker work ended");
     }
 
