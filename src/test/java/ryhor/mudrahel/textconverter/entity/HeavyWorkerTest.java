@@ -34,6 +34,19 @@ public class HeavyWorkerTest {
     }
 
     @Test
+    public void testSentNotificationUponCompletion() throws InterruptedException {
+        // Prepare test data
+        char[] message = new char[0];
+        heavyWorker.setMessage(message);
+
+        // Call the method under test
+        heavyWorker.run();
+
+        // Verify that convertAndSend is called for each character in the message (though doesn't verify order of chars)
+        verify(messagingTemplate, times(1)).convertAndSend("/topic/conversion-complete", "done");
+    }
+
+    @Test
     public void testNoMessageSentWithFlagOff() throws InterruptedException {
         // Prepare test data
         char[] message = {'a', 'b', 'c'};
@@ -43,7 +56,7 @@ public class HeavyWorkerTest {
         heavyWorker.run();
 
         // Verify no characters sent, as conversion flag set to false
-        verify(messagingTemplate, never()).convertAndSend(anyString(), anyString());
+        verify(messagingTemplate, never()).convertAndSend(eq("/topic/conversion"), anyString());
 
     }
 
